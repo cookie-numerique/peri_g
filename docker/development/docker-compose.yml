@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  skeleton:
+    container_name: skeleton
+    build:
+      context: ../../
+      dockerfile: docker/development/Dockerfile
+    image: next-js
+    ports:
+      - '3001:3000'
