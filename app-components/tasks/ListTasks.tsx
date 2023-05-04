@@ -11,6 +11,7 @@ type ListTasksProps = {
 }
 
 export default function ListTasks(props: ListTasksProps) {
+
   const {tasks = [], onClick = () => null, onDelete = () => null} = props;
 
   return (<Stack
@@ -35,17 +36,24 @@ export default function ListTasks(props: ListTasksProps) {
         }}
         container
       >
+        {/* Date task*/}
         <Grid item xs={2}>
           <Typography fontWeight="bold">{formatDate({date: task?.date, format: 'DD/MM/YYYY'})}</Typography>
         </Grid>
 
+        {/* Name task */}
         <Grid item xs={3}>
           <Typography>{task?.name}</Typography>
         </Grid>
+        {/* Description task */}
         <Grid item xs={6}>
-          <Typography fontStyle="italic">{task?.description ?? 'Aucune description'}</Typography>
+          <Typography
+            sx={{wordWrap: 'break-word'}}
+            fontStyle="italic"
+          >{task?.description ?? 'Aucune description'}</Typography>
         </Grid>
 
+        {/* Close icon for delete task */}
         <Grid item xs={1}>
           <Stack alignItems="end">
             <ClearIcon

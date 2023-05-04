@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Stack, TextField} from '@mui/material';
 import {useField} from '@formiz/core';
+import {FieldValidationObject} from "@formiz/core/src/types/field.types";
 
 type TextInputType = {
   label: string;
@@ -10,7 +11,7 @@ type TextInputType = {
   required?: boolean;
   defaultValue?: string | Date | number;
   type?: string;
-  validations?: object[];
+  validations?: FieldValidationObject[] | undefined;
   sx?: object;
 }
 
@@ -20,7 +21,7 @@ export default function TextInput(props: TextInputType) {
   const [isTouched, setIsTouched] = React.useState(false);
   const showError = !isValid && (isTouched || isSubmitted);
 
-  const {label, name, required, sx = {}, type = 'text', defaultValue = null, validations = []} = props;
+  const {label, name, required, sx = {}, type = 'text', defaultValue = null,} = props;
 
   // @ts-ignore
   return (
@@ -40,7 +41,6 @@ export default function TextInput(props: TextInputType) {
         aria-invalid={showError}
         aria-required={!!required}
         defaultValue={defaultValue}
-        validations={validations}
         sx={{...sx}}
       />
     </Stack>

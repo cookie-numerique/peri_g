@@ -38,7 +38,6 @@ export const useTaskManager = (): {
     try {
       tasksTable.update(task?.id, task);
       console.info(`Task updated with success.`);
-      await findAll();
       return task;
     } catch
       (error) {
@@ -76,7 +75,7 @@ export const useTaskManager = (): {
       return null;
     } catch
       (error) {
-      console.error(`Failed to delete ${task?.name}: ${error}`);
+      console.error(`Failed to delete task with id ${taskId}: ${error}`);
       return null;
     }
   }

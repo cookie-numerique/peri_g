@@ -5,7 +5,7 @@ import {TaskType} from "types/TaskType";
 import {Formiz, useForm} from "@formiz/core";
 import TextInput from "components/fields/TextInput";
 import {isMaxLength} from '@formiz/validations'
-import {formatDate} from "../../functions/dates/dates";
+import {formatDate} from "functions/dates/dates";
 import {useTaskManager} from "services/useTaskManager";
 
 const style = {
@@ -42,19 +42,22 @@ export default function ModalTask(props: ModalTaskProps) {
   const titleModal = isCreateForm ? "Ajouter une tâche" : "Modifier une tâche";
   const labelSubmit = isCreateForm ? "Ajouter" : "Modifier";
 
+  // By default the date purpose is today
   const currentDate = formatDate({format: 'YYYY-MM-DD'});
 
   // Queries
   const {updateTask} = useTaskManager();
+
   // Functions
   /**
    * @description Handle submit form
-   * @param {TaskType} values
+   * @param {TaskType} task
    * @return {void}
    */
   const handleSubmit = async (task: TaskType) => {
-
+    // If task is undefined, it's a create form
     isCreateForm ? await addTask(task) : await updateTask(task);
+    // Close modal
     handleClose();
   }
 
